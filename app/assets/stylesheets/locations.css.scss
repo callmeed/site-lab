@@ -1,0 +1,33 @@
+// Place all the styles related to the Locations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.og-image {
+  float:right;
+  img {
+    max-width:250px;
+    max-height:250px;
+    height:auto;
+    width:auto;
+  }
+}
+
+.technology-list {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  li {
+    list-style-type:none;  
+    margin:0 0 10px 0;
+    padding:0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    display:inline-block;
+    background:#eee;
+    a {
+      display:block;
+      padding:10px 15px;
+      font-weight:bold;
+    }
+  }
+}

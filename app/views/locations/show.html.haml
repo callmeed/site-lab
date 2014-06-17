@@ -1,0 +1,50 @@
+%p#notice= notice
+
+- if @meta.image
+  .og-image= image_tag @meta.image, class: 'img img-responsive img-thumbnail'
+
+%h2
+  = @location.name
+  %small= link_to 'edit', edit_location_path(@location)
+
+%p
+  %b Name:
+  = @location.name
+%p
+  %b URL:
+  = @location.url
+
+
+%h3 Technologies
+
+%ul.technology-list
+  - @location.technologies.each do |tech|
+    %li= link_to tech.name, tech
+
+
+%h3 Meta
+
+%p
+  %strong Title: 
+  = @meta.title
+  %br/
+
+  %strong Description:
+  = @meta.meta['description']
+  %br/
+
+  %strong Links: 
+  = @meta.links.size
+  %br/
+
+  %strong Images: 
+  = @meta.images.size
+  %br/
+
+  %strong Feed: 
+  = link_to @meta.feed, @meta.feed
+  %br/
+
+- if @location.cached_source.present? 
+  %h3 Cached Source
+  %pre= @location.cached_source

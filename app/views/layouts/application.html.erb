@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SiteLab</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header>
+  <div class="container-fluid">
+    <p>
+      <%= link_to 'Technologies', technologies_path %>
+      &nbsp;
+      <%= link_to 'Sites/Locations', locations_path %>
+    </p>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <%= yield %>
+</div>
+
+</body>
+</html>

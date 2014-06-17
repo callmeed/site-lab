@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @technology.name
+%p
+  %b Search Regex:
+  = @technology.search_regex
+
+= link_to 'Edit', edit_technology_path(@technology)
+\|
+= link_to 'Back', technologies_path

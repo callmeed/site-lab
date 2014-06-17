@@ -1,0 +1,21 @@
+%h1 Technologies
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Search Regex
+    %th
+    %th
+    %th
+
+  - @technologies.each do |technology|
+    %tr
+      %td= technology.name
+      %td= technology.search_regex
+      %td= link_to 'Show', technology
+      %td= link_to 'Edit', edit_technology_path(technology)
+      %td= link_to 'Destroy', technology, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Technology', new_technology_path

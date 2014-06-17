@@ -1,0 +1,16 @@
+= form_for @technology do |f|
+  - if @technology.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@technology.errors.count, "error")} prohibited this technology from being saved:"
+      %ul
+        - @technology.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :search_regex
+    = f.text_field :search_regex
+  .actions
+    = f.submit 'Save'
