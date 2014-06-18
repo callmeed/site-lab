@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: [:show, :edit, :update, :destroy, :scan]
 
   # GET /locations
   # GET /locations.json
@@ -11,6 +11,9 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @meta = MetaInspector.new(@location.url)
+    # MetaInspector's external_links method needs some cleanup
+    @external_links = @meta.external_links.select {|link| /^http/ =~ link }
+    @email_links = @meta.external_links.select {|link| /^mailto:/ =~ link }
   end
 
   # GET /locations/new
@@ -20,6 +23,15 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
+  end
+
+  # POST /locations/1/scan
+  def scan
+    @location.scan
+    respond_to do |format|
+      format.html { redirect_to @location, notice: 'Location was successfully scanned.' }
+      format.json { render :show, status: :ok, location: @location }
+    end
   end
 
   # POST /locations

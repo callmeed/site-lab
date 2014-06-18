@@ -1,50 +1,64 @@
-%p#notice= notice
+.row
+  .col-md-8
+    %h2
+      = @location.name
+      %small= link_to 'edit', edit_location_path(@location)
 
-- if @meta.image
-  .og-image= image_tag @meta.image, class: 'img img-responsive img-thumbnail'
-
-%h2
-  = @location.name
-  %small= link_to 'edit', edit_location_path(@location)
-
-%p
-  %b Name:
-  = @location.name
-%p
-  %b URL:
-  = @location.url
+    %table.table.table-hover
+      %tr
+        %th Name
+        %td= @location.name
+      %tr
+        %th URL
+        %td= link_to @location.url, @location.url, target: '_blank'
 
 
-%h3 Technologies
+    %h3 Technologies
 
-%ul.technology-list
-  - @location.technologies.each do |tech|
-    %li= link_to tech.name, tech
+    %ul.technology-list
+      - @location.technologies.each do |tech|
+        %li= link_to tech.name, tech
 
 
-%h3 Meta
+    %h3 Meta
 
-%p
-  %strong Title: 
-  = @meta.title
-  %br/
+    %table.table.table-hover
+      %tr
+        %th Title
+        %td= @meta.title
+      %tr
+        %th Description
+        %td= @meta.meta['description']
+      %tr
+        %th Links
+        %td= @meta.links.size
+      %tr
+        %th Images
+        %td= @meta.images.size
+      %tr
+        %th Feed
+        %td= link_to @meta.feed, @meta.feed
+      %tr
+        %th Email Links
+        %td
+          - @email_links.each do |mailto|
+            = link_to(mailto.gsub(/mailto:\s*/i,''), mailto)
+            %br/
+      %tr
+        %th External Links
+        %td
+          - @external_links.each do |link|
+            = link_to truncate(link, length: 50), link 
+            %br/
 
-  %strong Description:
-  = @meta.meta['description']
-  %br/
+    - if @location.cached_source.present? 
+      %h3 Cached Source
+      %pre= @location.cached_source
 
-  %strong Links: 
-  = @meta.links.size
-  %br/
-
-  %strong Images: 
-  = @meta.images.size
-  %br/
-
-  %strong Feed: 
-  = link_to @meta.feed, @meta.feed
-  %br/
-
-- if @location.cached_source.present? 
-  %h3 Cached Source
-  %pre= @location.cached_source
+  .col-md-4
+    .panel.panel-default
+      .panel-body
+        - if @meta.image
+          .og-image= image_tag @meta.image, class: 'img img-responsive'
+        %h3 Actions
+        %p= button_to 'Re-scan this URL', scan_location_path(@location), class: 'btn btn-info'

@@ -11,6 +11,9 @@ gem 'fastimage'
 gem 'rmagick'
 # Site meta stuff
 gem 'metainspector'
+# Selenium
+gem 'selenium-webdriver'
+
 
 gem 'haml'
 gem 'haml-rails'

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :technologies
-  resources :locations
+  resources :locations do 
+    member do 
+      post 'scan'
+    end
+  end
 
   root 'locations#index'
 
