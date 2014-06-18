@@ -16,6 +16,18 @@ Right now, it's fairly simple:
 
 More complex analysis is in the works. 
 
+Installation
+-----
+
+It's a Rails 4.1 app, so you'll need a dev environment that supports that (prolly RVM). 
+
+- Clone the repo
+- Edit the database.yml file with your info
+- Run `bundle install` to install gems
+- Run `bundle exec rake db:create` to create the DB(s)
+- Run `bundle exec rake db:seed` to load the seed data
+- Run `rails s` to start the server locally
+
 Screenshot
 -----
 

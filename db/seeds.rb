@@ -6,16 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-if Location.count == 0
-  locations = Location.create([
-    {name: 'Hacker News', url: 'http://news.ycombinator.com'},
-    {name: 'Tech Crunch', url: 'http://www.techcrunch.com'}, 
-    {name: 'ModCloth', url: 'http://www.modcloth.com/'}, 
-    {name: 'Skull Candy', url: 'http://www.skullcandy.com/'}
-    {name: 'Buzz Feed', url: 'http://www.buzzfeed.com/'}
-    ])
-end 
-
 if Technology.count == 0
   technologies = Technology.create([
     {name: 'WordPress', search_regex: "\/wp-content\/"},
@@ -30,3 +20,13 @@ if Technology.count == 0
     {name: 'AdRoll', search_regex: "function\s+setAdroll\(\)"}
     ])
 end
+
+if Location.count == 0
+  locations = Location.create([
+    {name: 'Hacker News', url: 'http://news.ycombinator.com'},
+    {name: 'Tech Crunch', url: 'http://www.techcrunch.com'}, 
+    {name: 'ModCloth', url: 'http://www.modcloth.com/'}, 
+    {name: 'Skull Candy', url: 'http://www.skullcandy.com/'}
+    {name: 'Buzz Feed', url: 'http://www.buzzfeed.com/'}
+    ])
+end 
