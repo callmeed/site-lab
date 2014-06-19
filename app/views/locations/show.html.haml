@@ -20,7 +20,7 @@
         %li= link_to tech.name, tech
 
 
-    %h3 Meta
+    %h3 Overview &amp; Links
 
     %table.table.table-hover
       %tr
@@ -42,7 +42,7 @@
         %th Email Links
         %td
           - @email_links.each do |mailto|
-            = link_to(mailto.gsub(/mailto:\s*/i,''), mailto)
+            = link_to(mailto.gsub(/mailto:\s*/i,'').gsub(/\?.+$/, ''), mailto)
             %br/
       %tr
         %th External Links
@@ -50,6 +50,17 @@
           - @external_links.each do |link|
             = link_to truncate(link, length: 50), link 
             %br/
+
+    %h4 Meta Tags
+    %table.table.table-hover
+      %tr
+        %th Tag
+        %th Value
+      - @meta.meta.each do |tag, value|
+        %tr
+          %td
+            %strong= tag
+          %td= value
 
     - if @location.cached_source.present? 
       %h3 Cached Source

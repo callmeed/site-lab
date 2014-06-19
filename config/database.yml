@@ -2,7 +2,6 @@ default: &default
   adapter: postgresql
   pool: 25
   timeout: 5000
-  username: erikdungan
   password:
   host: localhost
   port: 5432
@@ -11,10 +10,14 @@ default: &default
 development:
   <<: *default
   database: sitelab_development
+  username: erikdungan
+
 
 test:
   <<: *default
   database: sitelab_test
+  username: erikdungan
+
 
 production:
   <<: *default

@@ -25,3 +25,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
+
+
+# Heroku Deployment
+# Uncomment if you don't need it 
+# See https://devcenter.heroku.com/articles/getting-started-with-rails4
+gem 'rails_12factor', group: :production
+
+# Also required by Heroku
+ruby "2.1.1"
