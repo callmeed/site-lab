@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Site Lab : Open source website analyzer and technology tracker. Built with Ruby on Rails 4. " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Site Lab</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/callmeed/site-lab">View on GitHub</a>
+
+          <h1 id="project_title">Site Lab</h1>
+          <h2 id="project_tagline">Open source website analyzer and technology tracker. Built with Ruby on Rails 4. </h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/callmeed/site-lab/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/callmeed/site-lab/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="site-lab" class="anchor" href="#site-lab"><span class="octicon octicon-link"></span></a>Site Lab</h1>
+
+<p>Site Lab aims to be an open-source replacement for website analysis tools such as BuiltWith, NerdyData, and DataNyze. </p>
+
+<p>Site Lab is a Ruby on Rails application. It uses PostgreSQL as its database and Redis + Sidekiq for background processing (background processing still in the works). </p>
+
+<h2>
+<a name="screenshot" class="anchor" href="#screenshot"><span class="octicon octicon-link"></span></a>Screenshot</h2>
+
+<p><img src="https://raw.githubusercontent.com/callmeed/site-lab/master/screen.png" alt="Screenshot"></p>
+
+<h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>There is a live demo on Heroku at <a href="http://sitelabdemo.herokuapp.com/technologies">http://sitelabdemo.herokuapp.com/</a>. Please be a good citizen wrt the demo (e.g. try it with real-world data &amp; submit issues if you find a problem). </p>
+
+<h2>
+<a name="how-does-it-work-" class="anchor" href="#how-does-it-work-"><span class="octicon octicon-link"></span></a>How Does it Work? </h2>
+
+<p>Right now, it's fairly simple: </p>
+
+<ul>
+<li>The <a href="https://github.com/jaimeiniesta/metainspector">MetaInspector Gem</a> retrieves some basic info about the site/URL.</li>
+<li>There is a "Technology" model which stores regular expressions. For example, the regex /wp-content/ will match sites built with WordPress (because they all have wp-content paths in their source). </li>
+<li>Technologies are matched against the source of the sites/URLs. </li>
+</ul><p>More complex analysis is in the works. </p>
+
+<h2>
+<a name="why-did-you-build-this" class="anchor" href="#why-did-you-build-this"><span class="octicon octicon-link"></span></a>Why Did You Build This?</h2>
+
+<p>Two reasons: </p>
+
+<ol>
+<li>Current commercial SaaS products in this space are quite expensive (i.e. &gt; $200/month). Mainly because they aim to be lead-generation services. I'm not disputing their value, I just have smaller needs and a smaller budget. </li>
+<li>I have some specialized needs (i.e. I want to search for specific/niche technologies), so I like the flexibility of being able to define my own parameters.</li>
+</ol><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>It's a Rails 4.1 app, so you'll need a dev environment that supports that (prolly RVM). </p>
+
+<ul>
+<li>Clone the repo</li>
+<li>Edit the database.yml file with your info</li>
+<li>Run <code>bundle install</code> to install gems</li>
+<li>Run <code>bundle exec rake db:create</code> to create the DB(s)</li>
+<li>Run <code>bundle exec rake db:seed</code> to load the seed data</li>
+<li>Run <code>rails s</code> to start the server locally</li>
+</ul><h2>
+<a name="to-dos--roadmap" class="anchor" href="#to-dos--roadmap"><span class="octicon octicon-link"></span></a>TO-DOs &amp; Roadmap</h2>
+
+<ul>
+<li>Grab response header to determine web server/stack (a curl -I)</li>
+<li>Add batch-import of sites</li>
+<li>Add some background processing</li>
+<li>Add ElasticSearch for searching meta information</li>
+<li>Add auto-import of external links </li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Site Lab maintained by <a href="https://github.com/callmeed">callmeed</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
