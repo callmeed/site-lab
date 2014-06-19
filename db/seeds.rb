@@ -26,7 +26,11 @@ if Location.count == 0
     {name: 'Hacker News', url: 'http://news.ycombinator.com'},
     {name: 'Tech Crunch', url: 'http://www.techcrunch.com'}, 
     {name: 'ModCloth', url: 'http://www.modcloth.com/'}, 
-    {name: 'Skull Candy', url: 'http://www.skullcandy.com/'}
-    {name: 'Buzz Feed', url: 'http://www.buzzfeed.com/'}
+    {name: 'Skull Candy', url: 'http://www.skullcandy.com/'},
+    {name: 'Buzz Feed', url: 'http://www.buzzfeed.com/'},
+    {name: 'Engadget', url: 'http://www.engadget.com/'}, 
+    {name: 'Huffington Post', url: 'http://www.huffingtonpost.com/'}, 
+    {name: 'Tennis Warehouse', url: 'http://www.tennis-warehouse.com/'}, 
+    {name: 'Fab', url: 'http://fab.com/'}
     ])
 end 
