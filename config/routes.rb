@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     member do 
       post 'scan'
     end
+    collection do 
+      get 'batch'
+      post 'import'
+    end
   end
 
   root 'locations#index'

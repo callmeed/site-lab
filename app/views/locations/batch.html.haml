@@ -1,0 +1,13 @@
+%h1 
+  Batch Import Sites/Locations
+.form-container
+  = form_for(@location, url: import_locations_path) do |f|
+  
+    .form-group
+      = label_tag :list
+      = text_area_tag :list, nil, class: "form-control"
+    .actions
+      = f.submit 'Save'
+
+
+= link_to 'Back', locations_path

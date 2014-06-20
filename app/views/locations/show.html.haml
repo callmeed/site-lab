@@ -19,6 +19,17 @@
       - @location.technologies.each do |tech|
         %li= link_to tech.name, tech
 
+    %h3 Headers
+    %table.table.table-hover
+      %tr
+        %th Name
+        %th Value
+      - @headers.each do |tag, value|
+        %tr
+          %td
+            %strong= tag
+          %td= value
+
 
     %h3 Overview &amp; Links
 

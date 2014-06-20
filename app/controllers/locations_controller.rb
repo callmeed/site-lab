@@ -10,7 +10,8 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
-    @meta = MetaInspector.new(@location.url)
+    @meta = MetaInspector.new(@location.url, allow_redirections: :all)
+    @headers = @location.headers
     # MetaInspector's external_links method needs some cleanup
     @external_links = @meta.external_links.select {|link| /^http/ =~ link }
     @email_links = @meta.external_links.select {|link| /^mailto:/ =~ link }
@@ -19,6 +20,21 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
+  end
+
+  # GET /locations/batch
+  def batch
+    @location = Location.new
+  end
+
+  # POST /locations/import
+  def import
+    list = params[:list]
+    list.lines.each do |line|
+      url = line.chomp
+      location = Location.create({name:url, url: url, skip_scan: true})
+    end
+    redirect_to locations_path
   end
 
   # GET /locations/1/edit

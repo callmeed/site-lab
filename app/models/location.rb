@@ -1,6 +1,8 @@
 class Location < ActiveRecord::Base
   has_and_belongs_to_many :technologies
 
+  attr_accessor :skip_scan
+
   after_create :scan 
 
   def fetch_body(location = nil)
@@ -23,7 +25,14 @@ class Location < ActiveRecord::Base
     end
   end
 
+  def headers
+    response = Net::HTTP.get_response(URI.parse(self.url))
+    return response.header.to_hash
+  end
+
   def scan
+    # Skip scanning if set (this is for batch imports)
+    return if self.skip_scan
     # Fetch the body, get all technologies and scan
     body = self.fetch_body
     tech = Technology.all
