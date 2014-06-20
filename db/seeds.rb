@@ -10,7 +10,7 @@ if Technology.count == 0
   technologies = Technology.create([
     {name: 'WordPress', search_regex: "\/wp-content\/"},
     {name: 'Google Analytics', search_regex: "'UA[0-9-]+'"},
-    {name: 'Kissmetrics', search_regex: "_kms\('\/\/i\.kissmetrics.com\/i\.js'\)"},
+    {name: 'Kissmetrics', search_regex: "i\.kissmetrics\.com\/i\.js"},
     {name: 'Mixpanel', search_regex: "mixpanel\.init"}, 
     {name: 'Hello Bar', search_regex: "hellobar\.com\/hellobar\.js"},
     {name: 'Optimizely', search_regex: "\/\/cdn\.optimizely\.com"}, 

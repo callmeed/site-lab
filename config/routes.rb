@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   resources :technologies
   resources :locations do 
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
       post 'import'
     end
   end
-
+  mount Sidekiq::Web => '/sidekiq'
   root 'locations#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

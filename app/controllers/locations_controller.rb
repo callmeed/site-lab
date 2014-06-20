@@ -14,6 +14,7 @@ class LocationsController < ApplicationController
     @headers = @location.headers
     # MetaInspector's external_links method needs some cleanup
     @external_links = @meta.external_links.select {|link| /^http/ =~ link }
+    @internal_links = @meta.internal_links.select {|link| /^http/ =~ link }
     @email_links = @meta.external_links.select {|link| /^mailto:/ =~ link }
   end
 

@@ -3,6 +3,7 @@
 %table.table.table-striped
   %tr
     %th Name
+    %th Sites
     %th Search Regex
     %th
     %th
@@ -10,7 +11,8 @@
 
   - @technologies.each do |technology|
     %tr
-      %td= technology.name
+      %td= link_to technology.name, technology
+      %td= technology.locations_count
       %td= technology.search_regex
       %td= link_to 'Show', technology
       %td= link_to 'Edit', edit_technology_path(technology)

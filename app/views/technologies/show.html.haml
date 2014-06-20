@@ -1,11 +1,28 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @technology.name
+%h1= @technology.name
 %p
   %b Search Regex:
   = @technology.search_regex
+
+%h2 Known Locations
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th URL
+    %th
+    %th
+    %th
+
+  - @technology.locations.each do |location|
+    %tr
+      %td= link_to location.name, location
+      %td= link_to location.url, location.url, target: '_blank'
+      %td= link_to 'Show', location
+      %td= link_to 'Edit', edit_location_path(location)
+      %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
 
 = link_to 'Edit', edit_technology_path(@technology)
 \|

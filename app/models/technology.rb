@@ -6,4 +6,9 @@ class Technology < ActiveRecord::Base
     return /#{self.search_regex}/
   end
 
+  def self.update_counter_cache
+    all.each do |technology|
+      technology.update_attribute(:locations_count, technology.locations.count)
+    end
+  end
 end
