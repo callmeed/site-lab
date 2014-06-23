@@ -1,8 +1,23 @@
 require 'rubygems'
 require 'json'
 require 'net/http'
+require 'nokogiri'
 
 namespace :import do
+  desc "Imports all the links from ProductHunt" 
+  task producthunt: :environment do 
+    body = open('http://www.producthunt.com/').read
+    doc = Nokogiri::HTML.parse(body)
+    links = doc.css('a.post-url')
+    puts "Found #{links.size} links on ProductHunt ..."
+    links.each do |link|
+      url = "http://www.producthunt.com" + link['href']
+      puts "Importing #{link.text} (#{url})"
+      location = Location.create({name: link.text, url: url, skip_scan: true})
+      LocationScanWorker.perform_async(location.id)
+    end
+  end
+
   desc "Imports all startups from AngelList for a given tag"
   task :angellist, [:tag] => :environment do |t, args|
     args.with_defaults(tag: "wearables-2")
@@ -42,6 +57,7 @@ namespace :import do
           location.name = startup['name']
           location.skip_scan = true
           location.save
+          LocationScanWorker.perform_async(location.id)
         end
       end
     end
