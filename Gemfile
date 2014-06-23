@@ -10,11 +10,12 @@ gem 'foreman'
 gem 'fastimage'
 gem 'rmagick'
 # Site meta stuff
+gem 'public_suffix'
 gem 'metainspector'
 # Selenium
 gem 'selenium-webdriver'
 
-
+gem 'kaminari'
 gem 'haml'
 gem 'haml-rails'
 gem 'sass-rails', '~> 4.0.3'

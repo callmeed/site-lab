@@ -1,21 +1,24 @@
-%h1 Locations
+%h1 
+  Locations
+  %small= @count
 
 %table.table.table-striped
   %tr
     %th Name
     %th URL
-    %th
-    %th
+    %th Last Updated
     %th
 
   - @locations.each do |location|
     %tr
       %td= link_to location.name, location
       %td= link_to location.url, location.url, target: '_blank'
-      %td= link_to 'Show', location
-      %td= link_to 'Edit', edit_location_path(location)
-      %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= location.updated_at.strftime('%A, %d %b %Y %l:%M %p')
+      %td
+        = link_to 'Show', location
+        = link_to 'Edit', edit_location_path(location)
+        = link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+.paging= paginate @locations 
 
 = link_to 'New Location', new_location_path

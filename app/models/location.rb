@@ -12,12 +12,21 @@ class Location < ActiveRecord::Base
     
     location ||= self.url
 
-    response = Net::HTTP.get_response(URI.parse(location))
+    uri = URI(location) 
+    if uri.port == 443
+      # Ran into some ssl sites with bad certs, so we'll bypass
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      response = http.get(uri.request_uri)
+    else
+      response = Net::HTTP.get_response(uri)
+    end
     
     case response
     when Net::HTTPSuccess   
       body = response.body
-      self.update_attribute(:cached_source, body)
+      self.update_attribute(:cached_source, body.encode('UTF-8'))
       return body
     when Net::HTTPRedirection 
       self.update_attribute(:url, response['location'])

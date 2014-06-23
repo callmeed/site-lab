@@ -4,7 +4,8 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
+    @locations = Location.order('updated_at DESC').page params[:page]
+    @count = Location.count
   end
 
   # GET /locations/1
