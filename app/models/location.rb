@@ -11,6 +11,15 @@ class Location < ActiveRecord::Base
     where('cached_source IS NULL').order('created_at DESC')
   end
 
+  def emails(use_cache = true)
+    return [] if self.cached_source.blank?
+    emails = []
+    self.cached_source.scan(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i) do |x| 
+      emails << x
+    end
+    return emails.uniq
+  end
+
   def cached_body_text
     # Takes the cached source and 
     # extracts the text from the <body> with tags and JS removed
