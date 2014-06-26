@@ -23,6 +23,25 @@ namespace :import do
     end
   end
 
+  desc "Imports sites from VCDelta"
+  task vcdelta: :environment do 
+    body = open('http://neuvc.com/labs/vcdelta/').read
+    doc = Nokogiri::HTML.parse(body)
+    links = doc.xpath('//table/tbody/tr/td[3]/a')
+    puts "Found #{links.size} links on VCDelta ..."
+    links.each do |link|
+      url = link['href'] + '/'
+      location = Location.where(url: url).first_or_initialize
+      if location.new_record? 
+        puts "Importing #{link.text} (#{url})"
+        location.name = link.text
+        location.skip_scan = true
+        location.save
+        LocationScanWorker.perform_async(location.id)
+      end
+    end
+  end
+
   desc "Imports list of URLs from a file"
   task :file, [:filename] => :environment do |t, args|
     args.with_defaults(filename: "test.txt")
