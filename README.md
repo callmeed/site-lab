@@ -35,10 +35,11 @@ Importing Data
 While you can surely add sites/URLs one-by-one in the app, most use-cases will involve importing large sets of URLs from files or external sites. With that in mind, I've started a set of Rake tasks for importing URLs. Currently, it includes: 
 
 - Importing all startups from AngelList for a given market 
-- Importing all startup/product URLs listed on http://www.producthunt.com 
+- Importing all startup/product URLs listed on [Producthunt](http://www.producthunt.com)
 - Importing URLs from a text file (placed in app/import)
+- Importing all startup URLs from [VCDelta](http://neuvc.com/labs/vcdelta/)
 
-Run a `rake -T` to see the tasks and required parameters
+Run a `rake -T` to see the tasks and required parameters. There is also a sample text file in app/import. 
 
 Screenshot
 -----
