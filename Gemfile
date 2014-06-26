@@ -12,6 +12,7 @@ gem 'rmagick'
 # Site meta stuff
 gem 'public_suffix'
 gem 'metainspector'
+gem 'sanitize'
 # Selenium
 gem 'selenium-webdriver'
 

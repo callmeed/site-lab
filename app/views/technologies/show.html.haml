@@ -1,29 +1,34 @@
-%p#notice= notice
+.row
+  .col-md-8
+    %p#notice= notice
 
-%h1= @technology.name
-%p
-  %b Search Regex:
-  = @technology.search_regex
+    %h1 
+      = @technology.name
 
-%h2 Known Locations
+    %p
+      %b Search Regex:
+      = @technology.search_regex
 
-%table.table.table-striped
-  %tr
-    %th Name
-    %th URL
-    %th
-    %th
-    %th
+    %h2 
+      Known Locations
+      %small (#{@technology.locations_count})
 
-  - @technology.locations.each do |location|
-    %tr
-      %td= link_to location.name, location
-      %td= link_to location.url, location.url, target: '_blank'
-      %td= link_to 'Show', location
-      %td= link_to 'Edit', edit_location_path(location)
-      %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    %table.table.table-striped
+      %tr
+        %th Name
+        %th URL
 
+      - @technology.locations.each do |location|
+        %tr
+          %td= link_to location.name, location
+          %td= link_to location.url, location.url, target: '_blank'
 
-= link_to 'Edit', edit_technology_path(@technology)
-\|
-= link_to 'Back', technologies_path
+    = link_to 'Edit', edit_technology_path(@technology)
+    \|
+    = link_to 'Back', technologies_path
+
+  .col-md-4
+    .panel.panel-default
+      .panel-body
+        %h3 Actions
+        %p= button_to 'Re-scan for this technology', scan_technology_path(@technology), class: 'btn btn-info'

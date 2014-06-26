@@ -5,6 +5,19 @@ class Location < ActiveRecord::Base
 
   after_create :scan 
 
+  def self.uncached
+    # Find locations that have no cached source
+    # We assume these had problems fetching
+    where('cached_source IS NULL').order('created_at DESC')
+  end
+
+  def cached_body_text
+    # Takes the cached source and 
+    # extracts the text from the <body> with tags and JS removed
+    body_source = Nokogiri::HTML(cached_source.gsub(/<script[^<]+<\/script>/m,'')).css('body').text
+    body_text = Sanitize.fragment(body_source, Sanitize::Config::RELAXED).squish
+  end
+
   def fetch_body(location = nil)
     # This fetches the source/body of the location
     # It's recursive and will follow the location in the
@@ -25,8 +38,8 @@ class Location < ActiveRecord::Base
     
     case response
     when Net::HTTPSuccess   
-      body = response.body
-      self.update_attribute(:cached_source, body.encode('UTF-8'))
+      body = response.body.force_encoding('iso-8859-1').encode('utf-8')
+      self.update_attribute(:cached_source, body)
       return body
     when Net::HTTPRedirection 
       self.update_attribute(:url, response['location'])

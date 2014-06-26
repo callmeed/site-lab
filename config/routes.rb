@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  resources :technologies
+  resources :technologies do 
+    member do 
+      post 'scan'
+    end
+  end
   resources :locations do 
     member do 
       post 'scan'

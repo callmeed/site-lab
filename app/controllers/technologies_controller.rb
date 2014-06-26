@@ -1,5 +1,5 @@
 class TechnologiesController < ApplicationController
-  before_action :set_technology, only: [:show, :edit, :update, :destroy]
+  before_action :set_technology, only: [:show, :edit, :update, :destroy, :scan]
 
   # GET /technologies
   # GET /technologies.json
@@ -20,6 +20,12 @@ class TechnologiesController < ApplicationController
 
   # GET /technologies/1/edit
   def edit
+  end
+
+  # POST /technologies/1/scan
+  def scan
+    @technology.scan_locations
+    redirect_to technologies_url
   end
 
   # POST /technologies

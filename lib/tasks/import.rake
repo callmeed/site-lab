@@ -12,9 +12,33 @@ namespace :import do
     puts "Found #{links.size} links on ProductHunt ..."
     links.each do |link|
       url = "http://www.producthunt.com" + link['href']
-      puts "Importing #{link.text} (#{url})"
-      location = Location.create({name: link.text, url: url, skip_scan: true})
-      LocationScanWorker.perform_async(location.id)
+      location = Location.where(name: link.text).first_or_initialize
+      if location.new_record? 
+        puts "Importing #{link.text} (#{url})"
+        location.url = url
+        location.skip_scan = true
+        location.save
+        LocationScanWorker.perform_async(location.id)
+      end
+    end
+  end
+
+  desc "Imports list of URLs from a file"
+  task :file, [:filename] => :environment do |t, args|
+    args.with_defaults(filename: "test.txt")
+    puts "Importing file #{args.filename}"
+    text = File.open(File.join(Rails.root, 'app/import', args.filename)).read
+    text.each_line do |line|
+      url = line.chomp
+      name = url.gsub(/^http:\/\//i, '').gsub(/\/$/i,'')
+      puts "Importing #{name} ..."
+      location = Location.where(url: url).first_or_initialize
+      if location.new_record? 
+        location.name = name
+        location.skip_scan = true
+        location.save
+        LocationScanWorker.perform_async(location.id)
+      end
     end
   end
 

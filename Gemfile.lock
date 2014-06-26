@@ -42,6 +42,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     connection_pool (2.0.0)
+    crass (0.2.0)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
@@ -85,6 +86,8 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
+    nokogumbo (1.1.9)
+      nokogiri
     open_uri_redirections (0.1.4)
     pg (0.17.1)
     polyglot (0.3.5)
@@ -122,6 +125,10 @@ GEM
       redis (~> 3.0.4)
     rmagick (2.13.2)
     rubyzip (1.1.4)
+    sanitize (3.0.0)
+      crass (~> 0.2.0)
+      nokogiri (>= 1.4.4)
+      nokogumbo (= 1.1.9)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -190,6 +197,7 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails_12factor
   rmagick
+  sanitize
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   selenium-webdriver
