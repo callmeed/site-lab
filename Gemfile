@@ -13,8 +13,9 @@ gem 'rmagick'
 gem 'public_suffix'
 gem 'metainspector'
 gem 'sanitize'
-# Selenium
-gem 'selenium-webdriver'
+
+# Search
+gem 'searchkick', '0.6.3'
 
 gem 'kaminari'
 gem 'haml'

@@ -23,11 +23,12 @@
           %td= link_to location.name, location
           %td= link_to location.url, location.url, target: '_blank'
 
-    = link_to 'Edit', edit_technology_path(@technology)
-    \|
-    = link_to 'Back', technologies_path
+    .actions.hidden-print
+      = link_to 'Edit', edit_technology_path(@technology)
+      \|
+      = link_to 'Back', technologies_path
 
-  .col-md-4
+  .col-md-4.hidden-print
     .panel.panel-default
       .panel-body
         %h3 Actions

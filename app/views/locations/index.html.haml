@@ -1,5 +1,17 @@
+.search-box.pull-right
+  %h2 Search
+  %form.form-inline{role: "form", action: '/locations/search', method: 'get'}
+    .form-group
+      %label{for: "q"} 
+      %input#q.form-control{name: 'q', placeholder: "Your search term", type: "text", value: @q}/
+    
+    %button.btn.btn-info{type: "submit"} Search
+
 %h1 
   Locations
+  - if @q
+    Matching "#{@q}"
+    %small= link_to 'back to all locations', locations_path
   %small= @count
 
 %table.table.table-striped

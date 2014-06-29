@@ -1,14 +1,46 @@
 class Location < ActiveRecord::Base
+  searchkick index_name: "sitelab_locations"
+
   has_and_belongs_to_many :technologies
 
   attr_accessor :skip_scan
 
   after_create :scan 
 
+  def should_index?
+    return self.cached_source.present? 
+  end
+
+  def search_data
+    {
+      name: name,
+      technologies: self.technologies.map {|t| t.name }, 
+      emails: self.emails, 
+      body_text: self.cached_body_text,
+      source: self.cached_source
+    }
+  end
+
   def self.uncached
     # Find locations that have no cached source
     # We assume these had problems fetching
     where('cached_source IS NULL').order('created_at DESC')
+  end
+
+  def self.cached
+    where('cached_source IS NOT NULL').order('created_at DESC')
+  end
+
+  def self.app_links
+    links = []
+    Location.cached.order('updated_at DESC').limit(250).each do |l|
+      begin
+        page = MetaInspector.new(l.url, document: l.cached_source)
+        links.concat page.external_links.select{|link| link =~ /itunes\.apple/i }
+      rescue
+      end
+    end
+    return links
   end
 
   def emails(use_cache = true)
@@ -23,8 +55,17 @@ class Location < ActiveRecord::Base
   def cached_body_text
     # Takes the cached source and 
     # extracts the text from the <body> with tags and JS removed
-    body_source = Nokogiri::HTML(cached_source.gsub(/<script[^<]+<\/script>/m,'')).css('body').text
-    body_text = Sanitize.fragment(body_source, Sanitize::Config::RELAXED).squish
+
+    # ISSUE: The Sanitize gem sometimes throws an exception 
+    # undefined method `[]' for nil:NilClass
+    # Not sure why
+    begin
+      body_source = Nokogiri::HTML(self.cached_source.gsub(/<script[^<]+<\/script>/m,'')).css('body').text
+      body_text = Sanitize.fragment(body_source, Sanitize::Config::RELAXED).squish
+    rescue
+      body_text = ''
+    end
+    return body_text
   end
 
   def fetch_body(location = nil)

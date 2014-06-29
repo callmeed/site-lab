@@ -1,0 +1,13 @@
+%h1 
+  Recent App Links
+  %small= @links.size
+
+%table.table.table-striped
+  %tr
+    %th URL
+
+  - @links.each do |link|
+    %tr
+      %td= link_to link, link
+      
+

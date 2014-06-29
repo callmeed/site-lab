@@ -10,8 +10,10 @@ Rails.application.routes.draw do
       post 'scan'
     end
     collection do 
+      get 'search'
       get 'batch'
       post 'import'
+      get 'apps'
     end
   end
   mount Sidekiq::Web => '/sidekiq'

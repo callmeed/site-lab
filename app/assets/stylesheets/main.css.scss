@@ -1,3 +1,21 @@
+h1 {
+  font-family: 'Roboto Slab', serif;
+  font-weight:400;
+  small {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 300;
+  }
+}
+h2, h3, h4 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 300;
+}
+.search-box {
+  margin-bottom:20px;
+  h2 {
+    margin:0;
+  }
+}
 header {
   background:black;
   color:white;
@@ -18,4 +36,10 @@ header {
 }
 .form-container {
   max-width:600px;
+}
+
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
 }

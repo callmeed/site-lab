@@ -8,6 +8,21 @@ class LocationsController < ApplicationController
     @count = Location.count
   end
 
+  def apps
+    @links = Location.app_links
+  end
+
+  def search
+    if params[:q].present?
+      @q = params[:q]
+      @locations = Location.search params[:q], page: params[:page], per_page: 20
+      render :index
+    else
+      redirect_to locations_path
+    end
+  end
+
+
   # GET /locations/1
   # GET /locations/1.json
   def show
